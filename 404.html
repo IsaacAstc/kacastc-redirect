@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>새 주소로 이동 중…</title>
+<script>
+// kacastc.mooo.com → astc-lms.web.app 이동. 경로·쿼리·해시를 그대로 넘긴다
+// (예: /survey.html?c=… → https://astc-lms.web.app/survey.html?c=…).
+// 404.html 도 같은 내용이라 존재하지 않는 경로도 모두 여기로 온다.
+(function () {
+  var TARGET = "https://astc-lms.web.app";
+  // 옛 주소에 남은 서비스 워커(히어로 미션 오프라인 캐시 등) 정리.
+  try {
+    if (navigator.serviceWorker && navigator.serviceWorker.getRegistrations) {
+      navigator.serviceWorker.getRegistrations().then(function (rs) { rs.forEach(function (r) { r.unregister(); }); });
+    }
+  } catch (e) { /* 무시 */ }
+  location.replace(TARGET + location.pathname + location.search + location.hash);
+})();
+</script>
+<noscript><meta http-equiv="refresh" content="0; url=https://astc-lms.web.app/"></noscript>
+<style>
+  body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+         font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif; background: #f4f6f9; color: #222; }
+  a { color: #1a4d8f; }
+</style>
+</head>
+<body>
+  <p>새 주소로 이동 중입니다… 이동하지 않으면 <a id="go" href="https://astc-lms.web.app/">여기를 누르세요</a>.</p>
+  <script>document.getElementById("go").href = "https://astc-lms.web.app" + location.pathname + location.search + location.hash;</script>
+</body>
+</html>
